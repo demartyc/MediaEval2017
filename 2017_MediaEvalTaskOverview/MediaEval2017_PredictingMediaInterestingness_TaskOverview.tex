@@ -95,9 +95,9 @@ participant runs and the evaluation metrics.
 
 %\textcolor{red}{Bogdan, could you help for this?}
 
-Predicting the interestingness of media content has been an active axis of research in the computer vision community for several years now~\cite{Jiang2013, Gygli2013, Dhar2011, Amengual2015} and it has even been studied earlier in the psychological community~\cite{Berlyne1960, Smith1985, Silvia2006}. But, definitions of interestingness were multiple, datasets publicly available were only a few and, until last year, no benchmark did exist to assess the interestingness of content. In 2016, a task for the Prediction of Media Interestingness was proposed in the Media\-Eval 2016 Benchmarking Initiative for Multimedia Evaluation. This task was the opportunity to propose a clear definition of interestingness, compliant to a use case in industry, and in particular at Technicolor\footnote{\url{http://www.technicolor.com}}. The 2017 edition of the Media\-Eval benchmark includes a following of the Predicting Media Interestingness Task.
+Predicting the interestingness of media content has been an active area of research in the computer vision community for several years now~\cite{Jiang2013, Gygli2013, Dhar2011, Amengual2015} and it has even been studied earlier in the psychological community~\cite{Berlyne1960, Smith1985, Silvia2006}. However, there were multiple competing definitions of interestingness, only a few publicly available datasets, and until last year, no public benchmark existed to assess the interestingness of content. In 2016, a task for the Prediction of Media Interestingness was proposed in the Media\-Eval 2016 Benchmarking Initiative for Multimedia Evaluation. This task was also an opportunity to propose a clear definition of interestingness, compatible with a real-world industry use case at Technicolor\footnote{\url{http://www.technicolor.com}}. The 2017 edition of the Media\-Eval benchmark includes a follow-up of the Predicting Media Interestingness Task.
 %%
-This paper gives an overview of the task description in its second year, together with a description of the data and ground truth. The required runs and chosen evaluation metrics are also detailed. In all cases, changes that happen in this year's edition are highlighted compared to last year's edition.
+This paper gives an overview of the task description in its second year, together with a description of the data and ground truth. The required runs and chosen evaluation metrics are also detailed. In all cases, changes in this year's edition are highlighted compared to last year's edition.
 
 
 \vspace{-0.2cm}
@@ -107,7 +107,7 @@ This paper gives an overview of the task description in its second year, togethe
 The Predicting Media Interestingness Task was proposed for the first time last year. This year's edition is a follow-up which builds incrementally upon the previous experience. The task requires participants to automatically select images and/or video segments which are considered to be the most interesting for a common viewer. Interestingness of media is to be judged based on visual appearance, audio information and text accompanying the data, including movie metadata. To solve the task, participants are strongly encouraged to deploy multimodal approaches.
 
 As in 2016, interestingness should be assessed according to a practical use case at Technicolor, which involves helping professionals to illustrate a Video on Demand (VOD) web site by selecting some interesting frames and/or video excerpts for the movies. The frames and excerpts should be suitable in terms of helping a user to make his/her decision about whether he/she is interested in watching the whole movie.
-Once again, two subtasks will be offered to participants, which correspond to two types of available media content, namely images and videos. Participants are encouraged to submit to both subtasks. In both cases, the task will be considered as a binary classification AND a regression task. Prediction will be carried out on a per movie basis.
+Once again, two subtasks will be offered to participants, which correspond to two types of available media content, namely images and videos. Participants are encouraged to submit to both subtasks. In both cases, the task will be considered as a binary classification \emph{and} a ranking task. Prediction will be carried out on a per movie basis.
 % GYGLIM: Since the evaluation metric is MAP@10 the task is not really a classification, but a ranking task!
 %Ok with Nogc we tried to modify this part to add both binary classification and regression => it is already released this way at least on the wiki, we cannot change the rules now. Please tell us if this is clearer.
 The two taskes are:
@@ -126,7 +126,7 @@ The two taskes are:
 
 The data is extracted from Creative Commons licensed Hollywood-like videos: 103 movie trailers and 4 continuous extracts of ca. 15min from full-length movies. 
 %%
-For the video interestingness subtask, the data consists of video segments obtained after a manual segmentation. These segments correspond to shots (video shots are the continuous frame sequences recorded between a camera turn on and off) for all videos but four. Their average duration is of one second. The four last videos which correspond to the full-length movie extracts cited above, were manually segmented into longer segments (243) with an average duration of 11.4s, to better take into account a certain unity of meaning and the audio information of the resulting segments. For the image subtask, the data consists of collections of key-frames extracted from the video segments used for the video subtask (one key-frame per segment). This will allow comparing results from both subtasks. The extracted key-frame corresponds to the frame in the middle of each video segment.
+For the video interestingness subtask, the data consists of video segments obtained after a manual segmentation. These segments correspond to shots (video shots are the continuous frame sequences recorded between a camera turn on and off) for all videos but four. Their average duration is of one second. The four last videos, which correspond to the full-length movie extracts cited above, were manually segmented into longer segments (243) with an average duration of 11.4s, to better take into account a certain unity of meaning and the audio information of the resulting segments. For the image subtask, the data consists of collections of key-frames extracted from the video segments used for the video subtask (one key-frame per segment). This will allow comparing results from both subtasks. The extracted key-frame corresponds to the frame in the middle of each video segment.
 In total, 7,396 video segments and 7,396 key-frames are released in the development set, whereas the test set consists of 2435 video segments and the same number of key-frames.
 
 %\textcolor{red}{*** Here we could just copy-past what was said for the provided features last year or rewrite everything. Should we talk about the bug that was discovered in the face-tracking feature and the advice not to take into account negative values ? I am not sure of this. I am copying text from last year below. If we agree that this needs rephrasing, Michael, can you help for this part?***}
@@ -171,7 +171,7 @@ Both video and image data was manually and independently annotated in terms of i
 %%
 A dedicated web-based annotation tool was developed by the organising team for the previous edition of the task~\cite{demarty2016mediaeval}. 
 %%
-This year we made some improvements and released it as free and open source software\footnote{\url{https://github.com/mvsjober/pair-annotate}}.
+This year some incremental improvements were added, and the tool was released as free and open source software\footnote{\url{https://github.com/mvsjober/pair-annotate}}.
 %, so that others can benefit from it and contribute
 %improvements\footnote{\url{https://github.com/mvsjober/pair-annotate}}.
 %%
@@ -208,7 +208,7 @@ This year we used an alternative method, which took into account all pair compar
 This was done mainly because we discovered afterwards that some annotations from earlier rounds had to be discarded, because of some cheating annotators. %%
 These annotators occasionally switched to cheating, where they simply always selected the first, or the second item as the most interesting one without actually assessing the media contents.
 %%
-In the development set as much as 10\% of the annotations were marked as invalid and not included in the final BTL calculation. We added some heuristic anti-cheating measures to the system, although it is not possible to avoid all cheating processes.
+In the development set as much as 10\% of the annotations were marked as invalid and not included in the final BTL calculation. We added some heuristic anti-cheating measures to the system, although it is not possible to perfectly detect all cheating.
 %%
 Unfortunately, in the iterative approach, we could only discard annotations from the most recent round, as it would be based on the previous round's BTL output, which is why we developed another solution to compute the final BTL ranking.
 %%
@@ -265,7 +265,7 @@ NIST\footnote{\url{http://trec.nist.gov/trec\_eval/}}.
 \vspace{-0.2cm}
 \section{Conclusions}
 %===========
-Thanks to the 2017 Predicting Media Interestingness task, participants are proposed a complete and comparative framework for the evaluation of content interestingness. 
+In the 2017 Predicting Media Interestingness task a complete and comparative framework for the evaluation of content interestingness is proposed. 
 Details on the methods and results of each individual
 participant team can be found in the working note papers of the
 MediaEval 2017 workshop proceedings.
